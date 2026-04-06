@@ -1,0 +1,57 @@
+<mxfile host="app.diagrams.net" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.8 Chrome/114.0.5735.289 Electron/25.5.0 Safari/537.36">
+  <diagram id="LMS-ERD" name="LMS ERD">
+    <mxGraphModel dx="1373" dy="703" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="users" parent="1" style="shape=table;startSize=30;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;" value="users&#xa;--&#xa;id (PK)&#xa;full_name&#xa;email (Unique)&#xa;phone&#xa;status" vertex="1">
+          <mxGeometry height="130" width="140" x="320" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="user_auth" parent="1" style="shape=table;startSize=30;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;" value="user_auth&#xa;--&#xa;user_id (PK, FK)&#xa;password_hash&#xa;refresh_token" vertex="1">
+          <mxGeometry height="100" width="140" x="80" y="215" as="geometry" />
+        </mxCell>
+        <mxCell id="roles" parent="1" style="shape=table;startSize=30;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;" value="roles&#xa;--&#xa;id (PK)&#xa;role_name&#xa;description" vertex="1">
+          <mxGeometry height="100" width="140" x="570" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="user_roles" parent="1" style="shape=table;startSize=30;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;" value="user_roles&#xa;--&#xa;user_id (FK)&#xa;role_id (FK)" vertex="1">
+          <mxGeometry height="80" width="140" x="570" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="courses" parent="1" style="shape=table;startSize=30;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;" value="courses&#xa;--&#xa;id (PK)&#xa;instructor_id (FK)&#xa;title&#xa;price&#xa;level" vertex="1">
+          <mxGeometry height="130" width="140" x="320" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="classes" parent="1" style="shape=table;startSize=30;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;" value="classes&#xa;--&#xa;id (PK)&#xa;course_id (FK)&#xa;class_name&#xa;start_date" vertex="1">
+          <mxGeometry height="110" width="140" x="570" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="enrollments" parent="1" style="shape=table;startSize=30;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;" value="enrollments&#xa;--&#xa;id (PK)&#xa;user_id (FK)&#xa;class_id (FK)&#xa;progress" vertex="1">
+          <mxGeometry height="110" width="140" x="570" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_auth" edge="1" parent="1" source="user_auth" target="users">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_user_roles_u" edge="1" parent="1" source="user_roles" target="users">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_user_roles_r" edge="1" parent="1" source="user_roles" target="roles">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_course_ins" edge="1" parent="1" source="courses" target="users">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_class_course" edge="1" parent="1" source="classes" target="courses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_enroll_user" edge="1" parent="1" source="enrollments" target="users">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="480" y="655" />
+              <mxPoint x="480" y="265" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_enroll_class" edge="1" parent="1" source="enrollments" target="classes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
