@@ -27,14 +27,16 @@ const partialUpdateCourseSchema = {
     level: { enum: ['beginner', 'intermediate', 'advanced'] }
 };
 
+const { authenticateToken, authorizeRoles } = require('../middlewares/authMiddleware');
+
 // Định nghĩa các route
 router.get('/', courseController.getAllCourses);
 router.get('/:id', courseController.getCourseById);
-router.post('/', validate(createCourseSchema), courseController.createCourse);
+router.post('/', authenticateToken, validate(createCourseSchema), courseController.createCourse);
 // PUT - Cập nhật toàn bộ (Trường thiếu sẽ bị set NULL)
-router.put('/:id', validate(fullUpdateCourseSchema), courseController.updateCourseFull);
+router.put('/:id', authenticateToken, validate(fullUpdateCourseSchema), courseController.updateCourseFull);
 // PATCH - Cập nhật một phần (Giữ nguyên data cũ cho trường thiếu)
-router.patch('/:id', validate(partialUpdateCourseSchema), courseController.updateCoursePartial);
-router.delete('/:id', courseController.deleteCourse);
+router.patch('/:id', authenticateToken, validate(partialUpdateCourseSchema), courseController.updateCoursePartial);
+router.delete('/:id', authenticateToken, authorizeRoles('admin'), courseController.deleteCourse);
 
 module.exports = router;

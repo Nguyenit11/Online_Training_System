@@ -24,14 +24,16 @@ const partialUpdateClassSchema = {
     max_students: { type: 'number' }
 };
 
+const { authenticateToken, authorizeRoles } = require('../middlewares/authMiddleware');
+
 // Định nghĩa các route
 router.get('/', classController.getAllClasses);
 router.get('/:id', classController.getClassById);
-router.post('/', validate(createClassSchema), classController.createClass);
+router.post('/', authenticateToken, validate(createClassSchema), classController.createClass);
 // PUT - Cập nhật toàn bộ (Trường thiếu sẽ bị set NULL)
-router.put('/:id', validate(fullUpdateClassSchema), classController.updateClassFull);
+router.put('/:id', authenticateToken, validate(fullUpdateClassSchema), classController.updateClassFull);
 // PATCH - Cập nhật một phần
-router.patch('/:id', validate(partialUpdateClassSchema), classController.updateClassPartial);
-router.delete('/:id', classController.deleteClass);
+router.patch('/:id', authenticateToken, validate(partialUpdateClassSchema), classController.updateClassPartial);
+router.delete('/:id', authenticateToken, authorizeRoles('admin'), classController.deleteClass);
 
 module.exports = router;

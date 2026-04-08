@@ -29,10 +29,11 @@
 ### Bước 5: Triển khai CRUD mẫu (Implementation)
 - Thực thể Courses (Khóa học) :
   - Controller : Viết [courseController.js](controllers/courseController.js) xử lý đầy đủ 5 chức năng: Lấy danh sách, Lấy chi tiết, Tạo mới, Cập nhật, và Xóa.
-  - Validation : Sử dụng express-validator trong [courseRoutes.js](routes/courseRoutes.js) để kiểm tra dữ liệu gửi lên (ví dụ: tiêu đề không được để trống).
-  - Routing : Gắn route vào server chính tại địa chỉ /api/courses .
+  - Validation : Sử dụng Custom Middleware [validationMiddleware.js](middlewares/validationMiddleware.js) kết hợp với Schema định nghĩa trong Route để kiểm tra dữ liệu (ví dụ: tiêu đề tối thiểu 5 ký tự).
+  - Routing : Gắn route vào server chính tại địa chỉ `/api/courses` trong [index.js](index.js).
 
 - Thực thể Classes (Lớp học) :
-  - Controller : Viết [classController.js](controllers/classController.js) xử lý đầy đủ 5 chức năng: Lấy danh sách, Lấy chi tiết, Tạo mới, Cập nhật, và Xóa.
-  - Validation : Sử dụng express-validator trong [classRoutes.js](routes/classRoutes.js) để kiểm tra dữ liệu gửi lên (ví dụ: tên lớp không được để trống).
+  - Controller : Viết [classController.js](controllers/classController.js) xử lý đầy đủ 5 chức năng CRUD.
+  - Validation : Áp dụng Schema kiểm tra tên lớp và ID khóa học thông qua middleware bảo đảm tính toàn vẹn dữ liệu.
+  - Routing : Gắn route tại `/api/classes` .
   - Routing : Gắn route vào server chính tại địa chỉ /api/classes .

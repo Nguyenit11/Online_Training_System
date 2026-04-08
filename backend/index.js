@@ -3,6 +3,7 @@ const cors = require('cors');
 require('dotenv').config();
 const sequelize = require('./config/database');
 const errorHandler = require('./middlewares/errorHandler');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -29,6 +30,7 @@ app.get('/health', (req, res) => {
 });
 
 // Routes nghiệp vụ
+app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/classes', classRoutes);
 
